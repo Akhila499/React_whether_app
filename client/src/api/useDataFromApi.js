@@ -14,7 +14,7 @@ const useDataFromApi = () => {
     const fetchData = async () => {
       try{
         setAppState({wheatherData:appState.wheatherData, isFetching: true});
-        axios
+        await axios
           .get(`https://api.openweathermap.org/data/2.5/weather?q=Toronto&appid=${process.env.REACT_APP_WEATHER_API_KEY}`)
           .then((res)=>{
             setAppState({wheatherData: res.data, isFetching: false})
