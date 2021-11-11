@@ -15,9 +15,10 @@ const useDataFromApi = () => {
       try{
         setAppState({wheatherData:appState.wheatherData, isFetching: true});
         await axios
-          .get(`https://api.openweathermap.org/data/2.5/weather?q=Toronto&appid=${process.env.REACT_APP_WEATHER_API_KEY}`)
+          .get(`https://api.openweathermap.org/data/2.5/onecall?lat=43.7001&lon=-79.4163&exclude=hourly,minutely&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=metric`)
           .then((res)=>{
-            setAppState({wheatherData: res.data, isFetching: false})
+            const wantedData = res.data.daily.slice(0,5);
+            setAppState({wheatherData: wantedData, isFetching: false})
             console.log('res',res, res.data)
           })
       }catch(exception){
